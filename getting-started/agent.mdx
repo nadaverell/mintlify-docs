@@ -1,4 +1,6 @@
-# Koala Agent
+---
+title: 'Koala Agent'
+---
 
 ### About the agent
 
@@ -6,8 +8,9 @@ To display data in the web app, KoalaOps retrieves information from your Kuberne
 
 The agent is granted permissions in your cluster using Kubernetes' RBAC model, and you may modify them if needed.
 
-???+ info
-    If you've already installed the agent on your cluster as part of your [cluster connection](./clusters.md#connect-a-cluster) process, there's no need to do so again and you can skip the instructions below. 
+<Info>
+If you've already installed the agent on your cluster as part of your [cluster connection](clusters#connect-a-cluster) process, there's no need to do so again and you can skip the instructions below. 
+</Info>
 
 ### Requirements
 
@@ -15,14 +18,16 @@ Before installing the agent:
 
 - Make sure you have `kubectl` and `helm` installed.
 - Have a k8s cluster and make sure you're connected/authenticated to it.
-- Register the cluster ([see how](./clusters.md))
+- Register the cluster ([see how](clusters))
 - Authenticate your terminal with your cluster over your cloud provider. See details below.  
 
-??? info "Cluster Authentication"
+<Note>
+#### Cluster Authentication
 
     Before installing the agent, you'll need to authenticate your terminal with your cluster over your cloud provider.
 
-    === "GCP"
+    <Tabs>
+      <Tab title="GCP">
 
         If you have experience with k8s, this should be very familiar. You can read more in Google's [documentation for GKE](https://cloud.google.com/kubernetes-engine/docs/how-to/api-server-authentication#authenticating_using_oauth)
 
@@ -50,9 +55,11 @@ Before installing the agent:
         ```å
         kubectl cluster-info
         ```
-        !!! tip
+        <Tip>
             You can use the small utility `kubectx` to make managing and switching cluster contexts easier.
-    === "AWS"        
+        </Tip>
+      </Tab>
+      <Tab title="AWS">
         To access AWS services with the AWS CLI, you need an AWS account and IAM credentials. Ensure you have the following prerequisites in place:
 
         - [AWS CLI Version 2 Prerequisites](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-prereqs.html)
@@ -78,6 +85,9 @@ Before installing the agent:
         ```bash
         aws sts get-caller-identity --profile YOUR_PROFILE_NAME
         ```
+      </Tab>
+    </Tabs>
+</Note>
 
 ### Installing the agent
 

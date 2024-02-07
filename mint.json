@@ -2,14 +2,18 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "Koala Ops",
   "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
+    "dark": "/logo/koala_hero.png",
+    "light": "/logo/koala_hero.png"
   },
   "favicon": "/img/koala_logo_small.jpg",
   "colors": {
     "primary": "#660099",
     "light": "#d1b2e0",
     "dark": "#3d005b",
+    "background": {
+      "light": "#faf9fa",
+      "dark": "#1a151a"
+    },
     "anchors": {
       "from": "#660099",
       "to": "#d1b2e0"
@@ -27,6 +31,12 @@
   },
   "navigation": [
     {
+      "group": "Introduction",
+      "pages": [
+        "intro"
+      ]
+    },
+    {
       "group": "Getting Started",
       "pages": [
         "getting-started/basic-setup",
@@ -39,7 +49,7 @@
     {
       "group": "Usage",
       "pages": [
-        "usage/glossary",
+        "usage/basic-concepts",
         "usage/services",
         "usage/environments",
         "usage/chatops-overview",

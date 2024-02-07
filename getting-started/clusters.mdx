@@ -1,9 +1,11 @@
-# Clusters
+---
+title: 'Clusters'
+---
 
 KoalaOps currently supports GKE (Google Cloud) and EKS (AWS). We assume that your clusters (or at least one cluster) are already configured and operational. If you need help provisioning a new cluster, please [contact us](mailto:support@koalaops.com) and we'll be happy to assist.
 To use KoalaOps, you are required to connect every k8s cluster you intend to use.
 
-KoalaOps pulls information from the cluster using our [agent](agent.md), configures your code (k8s manifests, CI/CD etc), and performs operations (via CLI or agent) according to the clusters configured for the organization and for each service.
+KoalaOps pulls information from the cluster using our [agent](/getting-started/agent), configures your code (k8s manifests, CI/CD etc), and performs operations (via CLI or agent) according to the clusters configured for the organization and for each service.
 
 ## Cluster requirements
    
@@ -25,7 +27,7 @@ Koala currently requires two extremely common tools to be installed in the clust
             # You must replace this email address with your own.
             # Let's Encrypt will use this to contact you about expiring
             # certificates, and issues related to your account.
-            email: user@example.com  # (1)
+            email: user@example.com
             server: https://acme-v02.api.letsencrypt.org/directory
             privateKeySecretRef:
             # Secret resource that will be used to store the account's private key.
@@ -38,17 +40,17 @@ Koala currently requires two extremely common tools to be installed in the clust
     EOF
     ```
 
-    1.  :warning: Update to your own email address.
-
-??? info "Make sure you're authenticated to your cloud provider's cluster"
+<Note>
+Make sure you're authenticated to your cloud provider's cluster
+</Note>
 
     The Koala Agent installation requires your to be authenticated to your cluster.
-    See more details on how to do so in the Koala Agent [Requirements section](./agent.md#requirements).
+    See more details on how to do so in the Koala Agent [Requirements section](/getting-started/agent#requirements).
 
 ## Connect a Cluster
 
-=== "GCP"
-
+<Tabs>
+  <Tab title="GCP">
     You will need the following information about the cluster:
 
     - Cluster name (The exact name of your cluster as in GCP console)
@@ -57,7 +59,9 @@ Koala currently requires two extremely common tools to be installed in the clust
 
     Here is an example of how to extract those values from the GCP console:
 
+        <Frame>
         <img src="https://storage.googleapis.com/koala-public/GCP-console-example.png" alt="GKE Clusters"  />
+        </Frame>
 
     You can register the cluster using either the Google Web App or the Koala CLI. Find the instructions for both options below.
 
@@ -74,13 +78,17 @@ Koala currently requires two extremely common tools to be installed in the clust
 
         Click the 'Register' button. 
 
-        ![Connect new cluster](img/connect-cluster-gcp.png) 
+        <Frame>
+        ![Connect new cluster](/getting-started/img/connect-cluster-gcp.png) 
+        </Frame>
 
         ### Step 2: Install Agent
 
         Install the agent using `helm`: copy the command that was generated after clicking on Register into your terminal:
 
-        ![Install agent](img/install-agent-gcp.png)
+        <Frame>
+        ![Install agent](/getting-started/img/install-agent-gcp.png)
+        </Frame>
 
         You can always fetch this command in the future from the clusters list section.
       </Tab>
@@ -89,13 +97,12 @@ Koala currently requires two extremely common tools to be installed in the clust
 
         Then:
 
-        - Install the [agent](agent.md). After running the previous command you will receive a `helm install` command pre-populated with the unique API key for the cluster, which will install the agent. If needed, you can customize the namespace in which the agent will run.
+        - Install the [agent](/getting-started/agent). After running the previous command you will receive a `helm install` command pre-populated with the unique API key for the cluster, which will install the agent. If needed, you can customize the namespace in which the agent will run.
         - Make sure that the cluster is connected by looking at the cluster list in the web app. Before the agent is first installed it will say "Waiting for first check in"; when connected it will say "online".     
       </Tab>
     </Tabs>
-
-=== "AWS"
-
+  </Tab>
+  <Tab title="AWS">
     You will need the following information about the cluster:
 
     - Cluster name (The exact name of your cluster as in the AWS console)
@@ -104,8 +111,10 @@ Koala currently requires two extremely common tools to be installed in the clust
 
     Here is an example of how to extract those values from the AWS console:
 
-    ![Install agent](img/aws-console-cluster-fields.png)
-
+    <Frame>
+    ![Install agent](/getting-started/img/aws-console-cluster-fields.png)
+    </Frame>
+    
     ### Step 1: Register Cluster
 
     Open the web app and on the left side menu click Clusters -> Connect. Fill in:
@@ -119,20 +128,27 @@ Koala currently requires two extremely common tools to be installed in the clust
 
     Click the 'Register Cluster' button. 
 
-    ![Connect new cluster](img/connect-cluster-aws.png) 
+    <Frame>
+    ![Connect new cluster](/getting-started/img/connect-cluster-aws.png) 
+    </Frame>
 
     ### Step 2: Install Agent
 
     Install the agent using `helm`: copy the command that was generated after clicking on Register into your terminal:
 
-    ![Install agent](img/install-agent-aws.png)
+    <Frame>
+    ![Install agent](/getting-started/img/install-agent-aws.png)
+    </Frame>
 
     You can always fetch this command in the future from the clusters list section.
+  </Tab>
+</Tabs>
 
 ## Configure DNS via k8s Ingress
 
-??? info
+<Info>
     Kubernetes Ingress is an API object that provides routing rules to manage access to services within a Kubernetes cluster. It acts as a single entry point for external traffic to your Kubernetes services, making it easier to manage and expose your applications to the world.
+</Info>
 
 To enable ingress for your services in the cluster, you should configure the DNS for your domain to point to the cluster. This should be done in your DNS provider.
 

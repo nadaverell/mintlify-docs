@@ -1,4 +1,8 @@
-# GitHub Actions
+---
+title: 'GitHub Actions'
+description: 'Set up credentials for GitHub Actions to deploy to your clusters'
+---
+
 
 GitHub Actions is a continuous integration and continuous delivery (CI/CD) platform that allows you to automate your software development workflows right in your GitHub repository. It provides a simple and powerful way to build, test, and deploy your code, as well as automate other tasks such as managing issues and pull requests.
 
@@ -6,7 +10,8 @@ GitHub Actions is a continuous integration and continuous delivery (CI/CD) platf
 
 GitHub Actions uses secrets to store sensitive information, such as API keys and passwords. Secrets are encrypted and stored in GitHub's secure environment.
 
-=== "GCP"
+<Tabs>
+  <Tab title="GCP">
 
     KoalaOps configures GitHub Actions workflows for you that expect a secret called `GCP_CREDENTIALS` to be present.
     This secret needs to represent a key file for a service account with permissions to interact with k8s clusters and GCP Artifact Registry.
@@ -33,13 +38,15 @@ GitHub Actions uses secrets to store sensitive information, such as API keys and
 
     This will save a file called `sa-key.json` to your current working dir.
 
+  </Tab>
 
-=== "AWS"
+  <Tab title="AWS">
     KoalaOps configures GitHub Actions workflows for you that expect a secret called `AWS_CREDENTIALS` to be present.
     This secret needs to represent a key file for a service account with permissions to interact with k8s clusters and AWS Artifact Registry.
 
-    ??? "Coming Soon"
-        This section will be automated using the Koala CLI in the near future. 
+    <Note>
+        This section will be automated using the Koala CLI in the near future.
+    </Note>
 
     #### Set your AWS region and IAM user name
     ```bash
@@ -81,7 +88,8 @@ GitHub Actions uses secrets to store sensitive information, such as API keys and
 
     #### Extract access key and secret key
 
-    === "Without jq:"
+    <Tabs>
+      <Tab title="Without jq:">
         ```json
         {
             "AccessKey": {
@@ -93,15 +101,17 @@ GitHub Actions uses secrets to store sensitive information, such as API keys and
             }
         }
         ```
-    
-    === "With jq"
+      </Tab>
+      <Tab title="With jq">
       ```bash
       echo "Put the following secrets in github organization"
       access_key=$(echo $credentials | jq -r '.AccessKey.AccessKeyId')
       secret_key=$(echo $credentials | jq -r '.AccessKey.SecretAccessKey')
       ```
+      </Tab>
+    </Tabs>
 
-    #### Define Github Secrets 
+    #### Define Github Secrets
     Place the link below in your browser (Replace [OrganizationName] with your organization):
 
     https://github.com/organizations/[OrganizationName]/settings/secrets/actions/new
@@ -112,6 +122,8 @@ GitHub Actions uses secrets to store sensitive information, such as API keys and
     AWS_SECRET_ACCESS_KEY=SecretAccessKey
     ```
 
+  </Tab>
+</Tabs>
 
 ### Saving the Secret in GitHub
 
@@ -122,17 +134,16 @@ GitHub Actions uses secrets to store sensitive information, such as API keys and
 - Enter the value of your secret: copy the entire contents of the `sa-key.json` file created in the previous step.
 - Click on the 'Add secret' button.
 
-
 ## Working with Protected Branches
 
 KoalaOps creates GitHub Actions workflows for you, which in some cases need to automatically push changes to your git repo:
 
-* Automatic handling of semantic versioning: bumping your service's version (in a VERSION file in the root dir) in each release.
-* If using GitOps mode, deploying versions via updating kustomize overlays.
+- Automatic handling of semantic versioning: bumping your service's version (in a VERSION file in the root dir) in each release.
+- If using GitOps mode, deploying versions via updating kustomize overlays.
 
 If you use GitHub's protected branches feature and restrict pushes to `main`, the GitHub Actions Workflows won't be able to push these changes, because the built-in [GITHUB_TOKEN token](https://docs.github.com/en/actions/security-guides/automatic-token-authentication) does not have sufficient permissions. This is a well-known limitation of GitHub, requiring slightly inelegant workarounds (see example [discussion / FR](https://github.com/orgs/community/discussions/13836)).
 
-The simplest solution is to create a [PAT](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) (Personal Access Token), with a user that has bypass branch protection permissions. Organization and repository administrators can always bypass required pull requests, but you can also create a "service account" specifically for this if you prefer and allow it to bypass branch protection via `Repository settings -> Branches -> main -> Edit -> Allow specified actors to bypass required pull requests`. 
+The simplest solution is to create a [PAT](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) (Personal Access Token), with a user that has bypass branch protection permissions. Organization and repository administrators can always bypass required pull requests, but you can also create a "service account" specifically for this if you prefer and allow it to bypass branch protection via `Repository settings -> Branches -> main -> Edit -> Allow specified actors to bypass required pull requests`.
 
 Step-by-step:
 
@@ -141,10 +152,10 @@ Step-by-step:
 2. **Create a new organization secret** via Settings -> Secrets and Variables -> Actions. Choose a name, e.g. `GHA_PAT` and paste the PAT you created in the previous step as the value.
 3. **Update the Workflows** `release.yml` and (optionally, for GitOps mode) `deploy.yml` to use the PAT when checking out the code:
 
-    ```yaml
-    - uses: actions/checkout@v3
-      with:
-        token: ${{ secrets.GHA_PAT }}
-    ```
+   ```yaml
+   - uses: actions/checkout@v3
+     with:
+       token: ${{ secrets.GHA_PAT }}
+   ```
 
 The workflows will now use the new PAT instead of the default GITHUB_TOKEN, and will be able to push changes even if branch protection is enabled.
