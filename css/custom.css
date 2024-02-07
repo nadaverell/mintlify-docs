@@ -1,0 +1,5 @@
+.md-typeset [type=checkbox]:checked+.task-list-indicator:before {
+    background-color: #9574cd;
+    -webkit-mask-image: var(--md-tasklist-icon--checked);
+    mask-image: var(--md-tasklist-icon--checked);
+}

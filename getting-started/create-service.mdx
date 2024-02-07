@@ -1,0 +1,76 @@
+# Create a new service  
+
+## Prerequisites
+
+Make sure you have the following ready:
+
+- A GCP account & project or an AWS account.
+- At least one Kubernetes cluster - [see guidance here](/docs/getting-started/clusters.md)
+- Cloud provider credentials to be saved in a GitHub Actions secret ([instructions](/docs/getting-started/github-actions.md))
+
+## Add Service Page
+
+In the dashbaord side-menu, under "Services" click on "Add" 
+
+    <img src="https://storage.googleapis.com/koala-public/koala-create-service1.png" alt="KoalaOps create service"  />
+
+### Basic Details
+
+Fill out the following fields:
+
+- **Import or Create New Service?** Create a new service repo from scratch, or importing a service from an existing repo.
+- **Service Repo Type** Koala supports both single service per repo or a monorepo configuration.
+- **Select Repo** For importing an existing repo, fill in the repo address.
+- **Path in Repo** For importing from a monorepo, choose the path of the service within the repository.
+- **Service Name:** The name of the service (a repo will be created for the service with that name).
+- **Description:** A brief description of the service, to display in the UI.
+- **Server Framework:** What programming language and server framework to use as template for the new service. Pick "Empty" to only generate server-agnostic configurations and plug in your own code.
+- **Enable Ingress:** Whether the service should be exposed externally. You can control this more granularly for each environment later. You can turn this off for services that are only queried by other services inside the cluster.
+- **Enable SSL:** Automatically configure SSL, getting a certificate for the service from Let's Encrypt by default. Only applicable if ingress is enabled. 
+- **Create HTTP server** and **Create RPC server:** Coming soon. Whether the service should expose HTTP and/or RPC endpoints. KoalaOps currently only supports HTTP services out of the box, RPC will be supported soon.
+- **Domain:** The top-level domain to use for ingress by default (only applicable if ingress is enabled). You can override and customize the exact hostname later for each environment. The default format is:
+
+```
+<env>.<service-name>.<cluster-name>.<domain>
+```
+
+For example, if your company host is `koalaops.com` and you configured a cluster which is called `non-prod-cluster`. The unique URL for accessing the service "hello-world" in "dev" env will be:
+
+```
+dev.hello-world.non-prod-cluster.koalaops.com
+```
+- **Container Registry:** The registry to upload docker images to. If you don't have one yet, it's very easy to create one in your cloud provider. See instructions for [GCP](https://cloud.google.com/container-registry/docs/quickstart) or for [AWS](https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-create.html). 
+
+### Environments
+
+It's a common practice to utilize multiple environments such as: dev, testing, staging, production. Not all services will necessarily use the same environments, especially as your organization grows and different teams have different needs.
+
+We start by pre-populating 2 environments for you: "dev" and "prod". At a minimum you should specify which **cluster** is used for each environment. Click the edit button and choose from the dropdown menu for each env.
+
+!!! note
+
+    Support for deploying an environment to multiple clusters is coming soon.
+
+ You can also edit the name of the env and the following fields:
+
+**Namespace:** The [namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) to use in the k8s cluster. Depending on your setup, you can use namespaces to separate environments if they share a cluster, or have different applications or different teams use different namespaces.
+
+**Auto-deploy:** When set to "true", the CI/CD will auto-deploy to this environment on "Release" workflow success (currenly only one env can be set to auto-deploy).
+
+**Ingress host:** Override the default (see 'Domain' above) with any hostname you want for this environment. For example, you may want to stick with the default for non-prod envs, but the main production service should have a better user-facing URL such as `hello-world.koalaops.com`. Make sure to update your DNS provider accordingly.
+
+### Hit 'Create'!
+
+KoalaOps will now create the service and re-direct you to the new service page.
+
+You will get all of the following out of the box:
+
+- [x] A new repo on Github
+- [x] A service template (unless you chose 'Empty') and Dockerfile
+- [x] CI/CD pipeline with workflows for build, test, create a release and deploy
+- [x] Kustomize setup for multiple environments
+- [x] Ingress with SSL (if you chose, for each environment)
+- [x] Preset configurations for managing Env Vars and Secrets
+- [x] Full Observability stack (Logging, Monitoring, Tracing)
+- [x] Alerts (via PagerDuty, Slack, SMS)
+

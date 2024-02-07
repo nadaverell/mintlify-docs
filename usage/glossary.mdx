@@ -1,0 +1,30 @@
+# Glossary
+If you are new to Koala and to Kubernetes, see some basic definitions below to assist with the onboarding process.
+
+## Koala Projects
+Projects in Koala represent GitHub organizations (support for additional source code repositories is coming soon). 
+Every user also has access to a shared koala-sandbox environment for exploration purposes.
+
+## Service
+In Koala Ops, a *service* is the unit of deployment, the code that gets packaged and deployed together, regardless of environment. It could be a "microservice", or a larger service that has lots of different functionality or exposes several APIs. This reflects the typical perspective of dev teams, where a service is usually "owned" by some person or team, including everything related to it, from deployment process in multiple envs, to testing, observability and so on. In larger organizations, you will typically have different teams own different services, that all eventually get deployed to a global "prod" environment (and often additional static environments like *staging* or *dev*).
+
+This is different from the Kubernetes *service* object, which is just a low-level networking abstraction that defines a single point of access for a set of pods running your application in a single cluster. Of course, Koala Ops helps you configure the Kubernetes *service* objects.
+
+The Kubernetes service is useful at the lower level as it provides several key technical functionalities:
+
+1. Service discovery: Services assign a virtual IP address and DNS name to your pods, allowing other pods and external clients to find them easily, even if their actual IP addresses change due to pod scaling or restarts.
+
+2. Load balancing: Services distribute traffic across your pod replicas, ensuring high availability and efficient resource utilization. Imagine a queue of customers waiting to be served at a restaurant's counter. Instead of waiting for a specific server, they can approach any available one, and the service (the restaurant manager) ensures everyone gets served efficiently.
+
+3. Health checks: Services can monitor the health of your pods and automatically remove unhealthy ones from the traffic pool, preventing service disruptions.
+
+4. External access: Services can expose your application to the outside world through various mechanisms like NodePort, LoadBalancer, and Ingress, allowing external clients to access your application through a dedicated IP address or a domain name.
+
+## Environment
+An *Environment* in Koala refers to the concept of having multiple places where your services run (e.g. prod, staging, etc.). Teams usually choose to have multiple shared environments, where different services run together, potentially as part of a single larger "application".
+However, not all services have to use the same set of environments - what makes sense for Team A may not be the same as Team B. You can control which services are deployed to each environment and the service's release version within the environment.
+
+This is not to be confused with coding/development environments, which some use to describe local or remote development (not deployment) environments which focus on providing a common set of tools, plugins, modules etc. for developers to build and debug code.
+
+## Cluster
+A Kubernetes cluster is a distributed system for managing containerized applications. It consists of nodes (physical or virtual machines) running pods (groups of one or more containers). A central control plane, composed of various software components, coordinates the activity of the nodes and manages the lifecycle of the pods.

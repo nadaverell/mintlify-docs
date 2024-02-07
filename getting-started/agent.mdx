@@ -1,0 +1,87 @@
+# Koala Agent
+
+### About the agent
+
+To display data in the web app, KoalaOps retrieves information from your Kubernetes clusters using a lightweight agent. This agent operates as a persistent service on a single pod, maintaining communication with our backend. The agent only retrieves information, but does not apply actions directly. 
+
+The agent is granted permissions in your cluster using Kubernetes' RBAC model, and you may modify them if needed.
+
+???+ info
+    If you've already installed the agent on your cluster as part of your [cluster connection](./clusters.md#connect-a-cluster) process, there's no need to do so again and you can skip the instructions below. 
+
+### Requirements
+
+Before installing the agent:
+
+- Make sure you have `kubectl` and `helm` installed.
+- Have a k8s cluster and make sure you're connected/authenticated to it.
+- Register the cluster ([see how](./clusters.md))
+- Authenticate your terminal with your cluster over your cloud provider. See details below.  
+
+??? info "Cluster Authentication"
+
+    Before installing the agent, you'll need to authenticate your terminal with your cluster over your cloud provider.
+
+    === "GCP"
+
+        If you have experience with k8s, this should be very familiar. You can read more in Google's [documentation for GKE](https://cloud.google.com/kubernetes-engine/docs/how-to/api-server-authentication#authenticating_using_oauth)
+
+        Make sure you have `gcloud` installed and that you've also installed the `gke-gcloud-auth-plugin`. To install the plugin after `gcloud` is installed, run:
+
+        ```
+        gcloud components install gke-gcloud-auth-plugin
+        ```
+
+        Sign in to the gcloud CLI using your credentials. This opens a web browser to complete the authentication process to Google Cloud:
+
+        ```
+        gcloud auth login
+        ```
+
+        Use `gcloud` to retrieve the Kubernetes credentials for a specific cluster:
+
+        ```
+        gcloud container clusters get-credentials CLUSTER_NAME \
+            --zone=COMPUTE_ZONE
+        ```
+
+        Verify that you are authenticated by running any `kubectl` command, for example:
+
+        ```å
+        kubectl cluster-info
+        ```
+        !!! tip
+            You can use the small utility `kubectx` to make managing and switching cluster contexts easier.
+    === "AWS"        
+        To access AWS services with the AWS CLI, you need an AWS account and IAM credentials. Ensure you have the following prerequisites in place:
+
+        - [AWS CLI Version 2 Prerequisites](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-prereqs.html)
+        - [AWS CLI Installation Guide](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+
+        Authenticate the CLI with your AWS credentials or through SSO:
+
+        ```bash
+        aws configure
+        # or
+        aws configure sso
+        ```
+        Next you'll need to set your AWS profile name. 
+
+        To determine your AWS profile name, run the following command:
+
+        ```bash
+        aws configure list-profiles
+        ```
+
+        Using the profile name, define your AWS Profile:
+
+        ```bash
+        aws sts get-caller-identity --profile YOUR_PROFILE_NAME
+        ```
+
+### Installing the agent
+
+- Go the the Clusters -> List page in the KoalaOps UI.
+- Find the cluster you want to install, and click the 'INSTALL AGENT' button.
+- Copy the `helm install` command which is pre-populated with the unique API key for the cluster, and run in your terminal. If needed you can customize the namespace in which the agent will run.
+- Make sure the cluster is connected by looking at the cluster list in the web app. Before the agent is first installed, it will say "Waiting for first check in"; when connected it will say "online". It might take a few minutes for the agent to appear as "online" in the UI.

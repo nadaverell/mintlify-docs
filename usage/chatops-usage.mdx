@@ -1,0 +1,22 @@
+# ChatOps Assistant Usage & Examples
+
+## Usage
+The KoalaOps ChatOps Assistant is available in the context of a specific Service.
+You can find the assistant in the "ChatOps" tab of any of your services. 
+The assistant is fully aware of your service's configuration out of the box.  
+
+You can freely interact with the KoalaOps ChatOps assistant as you would with another chat based AI interface. You can create new threads by clicked the "+" sign and your recent history is available in case you'd like to review previous conversations. 
+The KoalaOps assistant is usually able to answer your questions within a few seconds. In rare cases, especially when code generation is involved, it may take the assistant up to two minutes to generate a reply.
+
+## Common Examples
+
+Here are some ideas for use cases that the Koala ChatOps Assistant can help you with:
+
+- Help me debug errors in production. For example, try asking it about the log below. After it provides the log analysis, ask it to increase your CPU resources by 50%. Example Log Message: 
+
+``` bash
+"2024-01-15T10:30:15.123Z [Warning] ResourcePressure: The pod 'koala-backed-pod-1' is experiencing high CPU utilization and there is insufficient CPU capacity available in the cluster."
+```
+
+- Answering questions about your configuration, for example: "What are the internal and external ports that are in use by my service?"
+- Make changes to your configuration: "Change the host address of my dev environment to my-domain.com".
