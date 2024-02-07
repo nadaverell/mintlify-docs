@@ -1,0 +1,97 @@
+# Overview
+
+KoalaOps can be used via our Web app or our CLI.
+
+## Sign in with GitHub
+
+Sign in to our [web app](https://app.koalaops.com/) with GitHub (other providers coming soon).
+
+We will ask for your permission for at least one organization in your GitHub account. We do this so we can create new repos (for new services) on your behalf.
+
+If you're not ready for that, you can try out KoalaOps via our "sandbox" - an open organization that you will see by default as an option in the UI. Just skip the step of adding other permissions for now.
+
+    <img src="https://storage.googleapis.com/koala-public/koala-signup-box.png" alt="KoalaOps signup screen"  />
+
+## Install Koala CLI
+
+The CLI installation is optional. The KoalaOps UI currently supports all available features.
+
+#### Brew
+
+``` bash
+brew tap KoalaOps/koala-cli;
+brew install koalaops/koala-cli/koala;
+```
+
+#### Linux / Mac direct download
+
+- Download the latest [release](https://github.com/KoalaOps/koala-cli/releases) for your OS/architecture.
+- Move the binary to your desired destination (make sure it's in your PATH), e.g. 
+  
+  ``` bash
+  mv koala_cli_Linux_x86_64 /usr/local/bin/koala
+  ```
+
+## Install additional tools
+
+At a minimum, you should install the following basic tools:
+
+- **kubectl:** The official Kubernetes command-line tool for managing Kubernetes clusters.
+- **kustomize:** A tool for customizing Kubernetes configuration files that eliminates the need for duplication and manual edits.
+
+One-liner installation command for convenience:
+
+```
+brew install kubectl kustomize
+```
+
+We highly recommend also installing a few other tools that are very useful for the day-to-day work with Kubernetes:
+
+- **helm:** A package manager for Kubernetes that simplifies the deployment and management of applications.
+- **skaffold:** A tool for automating the development workflow for Kubernetes applications.
+- **kubectx:** A utility that simplifies working with multiple Kubernetes clusters and namespaces.
+- **stern:** A tool for tailing and filtering Kubernetes log files from multiple pods and containers.
+
+One-liner installation command for convenience:
+
+```
+brew install helm skaffold kubectx stern
+```
+
+## Cloud Provider Prerequisites 
+Koala requires a basic Kubernetes cluster setup to operate successfully.
+
+If you already have a pre-configured Kubernetes setup on GCP or AWS, please review the list of requirements below to make sure that you have everything in place to connect Koala. 
+Otherwise, you can use our [Terraform template](https://github.com/KoalaOps/infra-template/) for GCP and AWS that can help with speeding up the setup.  
+
+If you require additional assistance with setting up your k8s cluster(s) over your cloud providers, please [contact us](mailto:support@koalaops.com) and we'll be happy to help set it up!
+
+<Tabs>
+  <Tab title="GCP">
+     Here are the Koala GCP requirements:
+
+    1. GCP Account with a GCP Project for the GKE cluster to operate in.
+    2. Enable GCP APIs - Enable the "Artifact Registry API" and the "Compute Engine API".
+    3. Docker Image Registry (Google Artifact Registry).
+    4. VPC Network - To be used as the primary subnet for GKE to allocate IP addresses for internal load balancers and nodes.
+    5. K8s Cluster(s):
+        1. Lean Setup - A single cluster to hold all service environments.
+        2. Standard Setup (Recommended) - with the following clusters:
+             1. Prod - To contain the production services only.
+             2. NonProd - To contain all other environments (Staging, Testing, Dev/Feature, etc)
+             3. Management Cluster - A cluster which will be used for managing the Prod and NonProd clusters.
+  </Tab>
+  <Tab title="AWS">
+    Here are the Koala AWS requirements:
+
+    1. AWS Account with an AWS Profile for the EKS cluster to operate in.
+    2. Docker Image Registry (AWS ECR Repository).
+    3. VPC Network - To be used as the primary subnet for EKS to allocate IP addresses for internal load balancers and nodes.
+    4. K8s Cluster(s):
+        1. Lean Setup - A single cluster to hold all service environments.
+        2. Standard Setup (Recommended) - with the following clusters:
+             1.  Prod - To contain the production services only.
+             2.  NonProd - To contain all other environments (Staging, Testing, Dev/Feature, etc)
+             3.  Management Cluster - A cluster which will be used for managing the Prod and NonProd clusters.
+  </Tab>
+</Tabs>

@@ -52,6 +52,7 @@
     {
       "group": "Get Started",
       "pages": [
+        "index",
         "introduction",
         "quickstart",
         "development"
@@ -80,6 +81,12 @@
         "api-reference/endpoint/get",
         "api-reference/endpoint/create",
         "api-reference/endpoint/delete"
+      ]
+    },
+    {
+      "group": "Getting Started",
+      "pages": [
+        "getting-started/basic-setup"
       ]
     }
   ],
