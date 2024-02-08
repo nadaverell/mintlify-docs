@@ -34,6 +34,11 @@
       "name": "CLI Reference",
       "icon": "square-terminal",
       "url": "cli-reference"
+    },
+    {
+      "name": "Change Log",
+      "icon": "notebook",
+      "url": "https://www.koalaops.com/changelog"
     }
   ],
   "navigation": [

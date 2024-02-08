@@ -22,14 +22,13 @@ Before installing the agent:
 - Authenticate your terminal with your cluster over your cloud provider. See details below.  
 
 <Note>
-#### Cluster Authentication
+Before installing the agent, you’ll need to authenticate to your cluster using your cloud provider's command line tool if you haven't already.
 
-    Before installing the agent, you'll need to authenticate your terminal with your cluster over your cloud provider.
-
+<Accordion title="Cluster Authentication Instructions">
     <Tabs>
       <Tab title="GCP">
 
-        If you have experience with k8s, this should be very familiar. You can read more in Google's [documentation for GKE](https://cloud.google.com/kubernetes-engine/docs/how-to/api-server-authentication#authenticating_using_oauth)
+        If you have experience with k8s, this should be very familiar. You can read more in Google's [documentation for GKE](https://cloud.google.com/kubernetes-engine/docs/how-to/api-server-authentication#authenticating_using_oauth).
 
         Make sure you have `gcloud` installed and that you've also installed the `gke-gcloud-auth-plugin`. To install the plugin after `gcloud` is installed, run:
 
@@ -87,6 +86,7 @@ Before installing the agent:
         ```
       </Tab>
     </Tabs>
+</Accordion>
 </Note>
 
 ### Installing the agent
