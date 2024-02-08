@@ -131,5 +131,10 @@
   ],
   "footerSocials": {
     "linkedin": "https://www.linkedin.com/company/koala-ops"
+  },
+  "analytics": {
+    "posthog": {
+        "apiKey": "phc_4SuuxYfkakRrgy25YxzG6JeiknFmBDjgz1pJVOzvML7"
+    }
   }
 }
