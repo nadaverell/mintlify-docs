@@ -1,0 +1,37 @@
+## koala update
+
+Update the service with various configuration changes
+
+### Synopsis
+
+Perform various configuration operations on the service,
+such as regenerating OpenAPI boilerplate, adding instrumentation, configuring SSL etc.
+
+```
+koala update [flags]
+```
+
+### Options
+
+```
+  -h, --help   help for update
+```
+
+### Options inherited from parent commands
+
+```
+  -o, --org string   Organization name
+```
+
+### SEE ALSO
+
+* [koala](/cli-reference/koala)	 - koala is a CLI tool to help you create and manage k8s services
+* [koala update api](/cli-reference/koala_update_api)	 - Update the service's API boilerplate base on the OpenAPI spec
+* [koala update cicd](/cli-reference/koala_update_cicd)	 - Update the service's CI/CD based on the config in .koala.toml
+* [koala update ingress](/cli-reference/koala_update_ingress)	 - Update the service's Ingress configuration based on the config in .koala.toml
+* [koala update metrics](/cli-reference/koala_update_metrics)	 - Instruments the service to export metrics.
+* [koala update profiling](/cli-reference/koala_update_profiling)	 - Adds profiling instrumentation for the service
+* [koala update ssl](/cli-reference/koala_update_ssl)	 - Configures SSL for the service
+* [koala update tracing](/cli-reference/koala_update_tracing)	 - Instruments the service to export tracing information.
+
+

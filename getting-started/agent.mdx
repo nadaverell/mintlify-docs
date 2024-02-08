@@ -91,7 +91,17 @@ Before installing the agent:
 
 ### Installing the agent
 
-- Go the the Clusters -> List page in the KoalaOps UI.
-- Find the cluster you want to install, and click the 'INSTALL AGENT' button.
-- Copy the `helm install` command which is pre-populated with the unique API key for the cluster, and run in your terminal. If needed you can customize the namespace in which the agent will run.
-- Make sure the cluster is connected by looking at the cluster list in the web app. Before the agent is first installed, it will say "Waiting for first check in"; when connected it will say "online". It might take a few minutes for the agent to appear as "online" in the UI.
+<Steps>
+  <Step>
+    Go the the Clusters -> List page in the KoalaOps UI.
+  </Step>
+  <Step>
+    Find the cluster you want to install, and click the 'INSTALL AGENT' button.
+  </Step>
+  <Step>
+    Copy the `helm install` command which is pre-populated with the unique API key for the cluster, and run in your terminal. If needed you can customize the namespace in which the agent will run.
+  </Step>
+    <Step>
+    Make sure the cluster is connected by looking at the cluster list in the web app. Before the agent is first installed, it will say "Waiting for first check in"; when connected it will say "online". It might take a few minutes for the agent to appear as "online" in the UI.
+  </Step>
+</Steps>

@@ -29,6 +29,13 @@
     "name": "Dashboard",
     "url": "https://app.koalaops.com"
   },
+  "anchors": [
+    {
+      "name": "CLI Reference",
+      "icon": "square-terminal",
+      "url": "cli-reference"
+    }
+  ],
   "navigation": [
     {
       "group": "Introduction",
@@ -43,17 +50,63 @@
         "getting-started/clusters",
         "getting-started/agent",
         "getting-started/github-actions",
-        "getting-started/create-service"
+        "getting-started/create-service",
+        "getting-started/basic-concepts"
       ]
     },
     {
-      "group": "Usage",
+      "group": "Services",
       "pages": [
-        "usage/basic-concepts",
-        "usage/services",
-        "usage/environments",
-        "usage/chatops-overview",
-        "usage/chatops-usage"
+        "services/overview",
+        "services/create-import",
+        "services/api",
+        "services/environments",
+        "services/logs",
+        "services/cicd",
+        "services/envvars-secrets",
+        "services/observability",
+        "services/deploy"
+      ]
+    },
+    {
+      "group": "ChatOps Assistant",
+      "pages": [
+        "chatops/overview",
+        "chatops/usage"
+      ]
+    },
+    {
+      "group": "Environments",
+      "pages": [
+        "environments/overview"
+      ]
+    },
+    {
+      "group": "CLI Reference",
+      "pages": [
+        "cli-reference/koala",
+        "cli-reference/koala_auth",
+        "cli-reference/koala_auth_sa-creds",
+        "cli-reference/koala_cluster",
+        "cli-reference/koala_cluster_list",
+        "cli-reference/koala_cluster_register",
+        "cli-reference/koala_cluster_remove",
+        "cli-reference/koala_config",
+        "cli-reference/koala_config_set",
+        "cli-reference/koala_create",
+        "cli-reference/koala_dev",
+        "cli-reference/koala_dev_local",
+        "cli-reference/koala_events",
+        "cli-reference/koala_list",
+        "cli-reference/koala_logs",
+        "cli-reference/koala_update",
+        "cli-reference/koala_update_api",
+        "cli-reference/koala_update_cicd",
+        "cli-reference/koala_update_ingress",
+        "cli-reference/koala_update_metrics",
+        "cli-reference/koala_update_profiling",
+        "cli-reference/koala_update_ssl",
+        "cli-reference/koala_update_tracing"
       ]
     }
   ],

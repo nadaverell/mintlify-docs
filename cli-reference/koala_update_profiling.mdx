@@ -1,0 +1,36 @@
+## koala update profiling
+
+Adds profiling instrumentation for the service
+
+### Synopsis
+
+Adds profiling instrumentation for the service.
+
+Only supported for Go at the moment. Operates by parsing the AST (Abstract
+Syntax Tree) of the service's main.go file, assuming the format used by
+Koala's Go server template.
+
+Uses pprof and exports data via the /debug/pprof endpoint, which pprof can then 
+collect.
+
+```
+koala update profiling [flags]
+```
+
+### Options
+
+```
+  -h, --help   help for profiling
+```
+
+### Options inherited from parent commands
+
+```
+  -o, --org string   Organization name
+```
+
+### SEE ALSO
+
+* [koala update](/cli-reference/koala_update)	 - Update the service with various configuration changes
+
+
