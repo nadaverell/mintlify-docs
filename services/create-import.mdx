@@ -3,44 +3,8 @@ title: 'Create and Import Services'
 ---
 
 ## Create Service
-For instructions on how to create a service in Koala, refer to the [Create Service](/getting-started/create-service) page in the Getting Started section.
-
-KoalaOps currently supports only the creation of new services and their repositories from scratch.
-Support for adding existing repositories will be added soon. If you would like to connect an existing repository, [contact us](mailto:support@koalaops.com), and we will be happy to assist.
+For instructions on how to create or import a service into Koala, refer to the [Create Service](/getting-started/create-service) page in the Getting Started section.
 
 ## Services List
 The Services List displays all of the services that have been added to KoalaOps.
 It includes the service name, description, a link to its GitHub repo, and an option to remove it from KoalaOps.
-
-## Service Page
-
-### General
-This section provides basic information about the service, such as its description, GitHub repo, and the container registry name. You can also view the deployment status in each of the environments where it is deployed.
-
-### API
-For services using the popular OpenAPI (Swagger) spec, you will be able to see the APIs exposed by your service and run API calls directly through the UI over the service in different environments.
-
-- Choose the relevant environment at the top.
-- Authenticate with the API if required.
-- Interact with any of the API endpoints.
-
-### Environments
-Shows all the environments in which the service is deployed, including the cluster name, namespace, ingress status, etc.
-This page also allows you to create new environments to deploy your service over. 
-
-### Logs
-Provides a basic interface to present recent logs for easy analysis. There's also a direct link to the log's tools interface for each of the environments.
-
-### CI/CD
-View recent deployments and their status. A quick link is provided for each deployment into the CI/CD tool.
-
-### Env Variables & Secrets
-This section allows you to view and edit the global vars and environment-specific env vars.
-
-The Secrets sub-section (coming soon!) also helps you manage which secrets are provided to the pod from Kubernetes, as well as sync the secrets from any secret manager to the right namespace in the right Kubernetes cluster.
-
-### Observability
-Define your metrics collector and configuration.
-
-### Deploy
-Deploy an already-built container image to a selected enviroment, or trigger a new build & deploy workflow from any branch.
