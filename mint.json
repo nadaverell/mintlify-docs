@@ -1,9 +1,10 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Koala Ops",
+  "name": "KoalaOps",
   "logo": {
     "dark": "/logo/koala_hero.png",
-    "light": "/logo/koala_hero.png"
+    "light": "/logo/koala_hero.png",
+    "href": "https://www.koalaops.com"
   },
   "favicon": "/img/koala_logo_small.jpg",
   "colors": {
