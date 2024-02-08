@@ -87,6 +87,20 @@
       ]
     },
     {
+      "group": "Security and Compliance",
+      "pages": [
+        "security-compliance/rbac",
+        "security-compliance/soc2"
+      ]
+    },
+    {
+      "group": "Terms & Privacy",
+      "pages": [
+        "terms-privacy/terms-of-service",
+        "terms-privacy/privacy-policy"
+      ]
+    },
+    {
       "group": "CLI Reference",
       "pages": [
         "cli-reference/koala",
